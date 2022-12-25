@@ -1,0 +1,33 @@
+<%- include("partials/header") %>
+<div class="container">
+ <% if(message){ %>
+    <div class="alert alert-success" role="alert">
+      <%=message%>
+    </div>
+<%  } %>
+ 
+  <table class="table">
+      <thead>
+          <th>Sno</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Speacialization</th>
+          <th>Address</th>
+          <th></th>
+      </thead>
+      <tbody>
+         <% users.forEach(function(itm){ %>
+            <tr>
+                <th><%=x%></th>
+               <td><%=itm.name%></td>
+               <td><%=itm.contact_no%></td>
+               <td><%=itm.specialization%></td>
+               <td><%=itm.address%></td>
+               <td><a href="/appiontment/<%=founds._id%>/<%=itm._id%>" class="btn btn-dark">Fix Appointment</a></td>
+            </tr>
+            <%x++;%>
+        <%  }) %>
+          
+      </tbody>
+  </table>
+</div>

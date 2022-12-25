@@ -1,0 +1,98 @@
+<%- include("admin") %>
+<div class="container">
+    <h1>ADD Patient</h1>
+    <form action="" method="post">
+        <div class="row">
+            <div class="col">
+                <label class="label-control">Name</label>
+                <input type="text" name="name" class="form-control" id="" required>
+            </div>
+            <div class="col">
+                <label class="label-control">Age</label>
+                <input type="text" name="age" class="form-control" id="" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="label-control">Contact</label>
+                <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" name="contact" class="form-control" id="" required>
+            </div>
+            <div class="col">
+                <label class="label-control">Disease</label>
+                <input type="text" name="disease" class="form-control" id="" required>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Date</label>
+                <input type="date" name="date" class="form-control" id="" required>   
+            </div>
+            <div class="col">
+                <label class="form-label">Address</label>
+                <input type="text" name="address" class="form-control" id="" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Assign Doctor</label>
+                <select name="doctor" class="btn btn-lg btn-dark form-control " id="">
+                    <option value="volvo">Select</option>
+                   <% doc.forEach(function(item){ %>
+                    <option value="<%=item.name%>"><%=item.name%></option>
+                   <% }) %>
+                 </select>
+            </div>
+            <div class="col">
+                <label class="form-label">Assign Ward</label>
+                <select name="ward" class="btn btn-lg btn-dark form-control " id="">
+                    <option value="volvo">Select</option>
+                    <option value="General">General</option>
+                    <option value="ICU">ICU</option>
+                    <option value="VIP">VIP</option>
+                 </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="" required>
+            </div>
+        </div>
+        
+        <button style="margin: 20px 0;" type="submit" class="btn btn-lg btn-success">Submit Your Details</button>
+        
+    </form>
+    <table class="table">
+        <thead>
+            <th>Sno</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Disease</th>
+            <th>Date</th>
+            <th>Address</th>
+            <th>Assign Doc</th>
+            <th>Email</th>
+            <th>Ward</th>
+        </thead>
+        <tbody>
+           <% pati.forEach(function(itm){ %>
+            <tr>
+                <th><%=x%></th>
+                <td><%=itm.name%></td>
+                <td><%=itm.age%></td>
+                <td><%=itm.contact%></td>
+                <td><%=itm.disease%></td>
+                <td><%=itm.date.toDateString();%></td>
+                <td><%=itm.address%></td>
+                <td><%=itm.doctor%></td>
+                <td><%=itm.email%></td>
+                <td><%=itm.ward%></td>
+            </tr>
+            <%x++;%>
+         <%  }) %>
+            
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,37 @@
+<%- include("admin") %>
+<div class="container">
+    <h1>Discharge</h1>
+    <table class="table">
+        <thead>
+            <th>Sno</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Disease</th>
+            <th>Date</th>
+            <th>Address</th>
+            <th>Assign Doc</th>
+            <th>Ward</th>
+            <th></th>
+        </thead>
+        <tbody>
+           <% doc.forEach(function(itm){ %>
+            <tr>
+                <th><%=x%></th>
+                <td><%=itm.name%></td>
+                <td><%=itm.age%></td>
+                <td><%=itm.contact%></td>
+                <td><%=itm.disease%></td>
+                <td><%=itm.date.toDateString();%></td>
+                <td><%=itm.address%></td>
+                <td><%=itm.doctor%></td>
+                <td><%=itm.ward%></td>
+                <td><a href="/discharge/<%=itm._id%>" class="btn btn-dark">Discharge</a></td>
+            </tr>
+            <%x++;%>
+         <%  }) %>
+            
+        </tbody>
+    </table>
+    
+</div>

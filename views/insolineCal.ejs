@@ -1,0 +1,423 @@
+<style>
+    *,
+*:before,
+*:after {
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+html {
+background-color: #2e4049;
+color: white;
+}
+
+.page{
+padding: 2rem;
+}
+
+form {
+width: 40%;
+max-width: 350px;
+margin: 0 auto 30px;
+}
+
+fieldset {
+background: #202d33;
+border-radius: 4px;
+border: none;
+border-top: 2px solid tomato;
+margin-bottom: 30px;
+box-shadow: 0 5px 30px rgba(0, 0, 0, .3);
+padding: 10px 15px;
+}
+
+legend {
+font-weight: bold;
+margin-bottom: 10px;
+padding-right: 10px;
+}
+
+.number {
+background: tomato;
+margin-right: 10px;
+padding: 10px 4px 4px;
+}
+
+h1 {
+margin: 0 0 60px 0;
+text-align: center;
+font-size: 3em;
+color: tomato;
+}
+
+p{
+text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+background: rgba(255, 255, 255, 0.1);
+border: none;
+font-size: 16px;
+height: auto;
+margin: 0;
+outline: 0;
+padding: 10px;
+width: 100%;
+background-color: #e8eeef;
+color: #2E4049;
+box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+margin-bottom: 20px;
+}
+
+input[type="checkbox"] {
+margin: 0 4px 8px 0;
+}
+
+input[type="radio"] {
+margin: 0 2px 0 15px;
+}
+
+input:read-only{
+background: yellow;
+cursor: not-allowed;
+}
+
+label {
+display: inline-block;
+margin-bottom: 10px;
+}
+
+output{
+display: block;
+font-size: 3rem;
+}
+
+.btn {
+display: inline-block;
+margin: 15px auto;
+padding: 10px 20px;
+background-color: tomato;
+border: none;
+color: #fff;
+border-radius: 5px;
+font-weight: bold;
+}
+
+.btn:active {
+box-shadow: 0 0px 0 #ea553a, 0 1px 0 #b72b12, 0 2px 0 #420900, 0 2px 10px #0b3f3b, 0 2px 11px #ff546a, 0 0 20px tomato;
+outline: 0;
+}
+
+.btn:focus {
+outline: 0;
+}
+
+.btn:disabled{
+cursor: not-allowed;
+background-color: #f2f2f2;
+color: rgba(148, 152, 155, 0.5);
+border: solid 2px transparent;
+box-shadow: none;
+}
+
+@media (max-width: 840px) {
+form {
+width: 70%;
+}
+}
+
+@media (max-width: 490px) {
+form {
+width: 100%;
+}
+.btn {
+display: block;
+width: 100%;
+}
+}
+
+.loader,
+.loader:after {
+border-radius: 50%;
+width: 10em;
+height: 10em;
+}
+.loader {
+margin: 60px auto;
+font-size: 10px;
+position: relative;
+text-indent: -9999em;
+border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+border-left: 1.1em solid #ffffff;
+-webkit-transform: translateZ(0);
+-ms-transform: translateZ(0);
+transform: translateZ(0);
+-webkit-animation: load8 1.1s infinite linear;
+animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+0% {
+-webkit-transform: rotate(0deg);
+transform: rotate(0deg);
+}
+100% {
+-webkit-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+}
+@keyframes load8 {
+0% {
+-webkit-transform: rotate(0deg);
+transform: rotate(0deg);
+}
+100% {
+-webkit-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+}
+
+</style>
+<main class="page">
+    <!--   <div class="loader">Loading...</div> -->
+      <section id="intro" hidden>
+        <h1>Insulin dose calculator</h1>
+        <p>Your provider will prescribe an insulin dose regimen for you; however, you still need to calculate some of your insulin doses. Your insulin dose regimen provides formulas that allow you to calculate how much bolus insulin to take at meals and snacks, or to correct high blood sugars.</p>
+        <button class="btn">Calculate Dose</button>
+        <button class="btn">View History</button>
+      </section>
+      <section id="calculator">
+        <form action="" class="js-insulin-calc">
+          <fieldset>
+            <legend><span class="number">1</span>Insulin dose calculator</legend>
+            <label for="totCarbs">Total Carbs (g)</label>
+            <input type="text" id="totCarbs" value="60" />
+            <label for="currentBS">Current Blood Sugar (mmol)</label>
+            <input type="text" id="currentBS" value="12" />
+            <label for="targetBS">Target Blood Sugar (mmol)</label>
+            <input type="text" id="targetBS" value="6.6" readonly />
+            <label for="inChoRatio">Insulin CHO Ratio</label>
+            <input type="text" id="inChoRatio" value="10" readonly />
+            <label for="correctFactor">Correction Factor</label>
+            <input type="text" id="correctFactor" value="2.8" readonly />
+            <button type="submit" class="btn js-submit">Calculate</button>
+            <button type="button" class="btn js-reset" disabled="true">Reset</button>
+          </fieldset>
+    
+          <fieldset class="js-output" hidden>
+            <legend>
+              <span class="number">2</span> 
+              Total Meal Dose
+            </legend>
+    
+            <output class="js-insulin-result"></output>
+            <button type="submit" disabled class="btn">Save Results</button>
+          </fieldset>
+        </form>
+      </section>
+      <section id="saved" hidden>
+        <table>
+          <caption>History</caption>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Total Carbs</th>
+              <th>Current Blood Sugar</th>
+              <th>Target Blood Sugar</th>
+              <th>Insulin CHO Ratio</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>11:23am - 30/9/2018</td>
+              <td>60g</td>
+              <td>12.2mmol</td>
+              <td>6.6mmol</td>
+              <td>20</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <script>
+          var myBin;
+var form = document.querySelector('.js-insulin-calc');
+var resetBtn = form.querySelector('.js-reset');
+var submitBtn = form.querySelector('.js-submit');
+var outputArea = document.querySelector('.js-output');
+var fields = {
+  totalCarbs: document.querySelector('#totCarbs'),
+  bloodSugar: document.querySelector('#currentBS'),
+  targetBloodSugar: document.querySelector('#targetBS'),
+  CHORatio: document.querySelector('#inChoRatio'),
+  correctionFactor: document.querySelector('#correctFactor'),
+  outputDose: document.querySelector('.js-insulin-result')
+};
+
+var Calculator = function () {
+  
+  var getCarbs = function(){
+    return fields.totalCarbs.value;
+  };
+
+  var getBloodSugar = function(){
+    return fields.bloodSugar.value;
+  };
+
+  var getTargetBloodSugar = function(){
+    return fields.targetBloodSugar.value;
+  };
+
+  var getCHORatio = function(){
+    return fields.CHORatio.value;
+  };
+
+  var getCorrectionFactor = function(){
+    return fields.correctionFactor.value;
+  };
+  
+  var getDosage = function(){
+    return fields.outputDose.value;
+  };
+
+  var carbCoverageAtMeal = function(){
+    var totalCarbs = getCarbs();
+    var insulinRatio = getCHORatio();
+    var result = totalCarbs / insulinRatio;
+
+    return result;
+  };
+
+  var highBloodSugarCorrection = function(){
+    var currentBS = getBloodSugar();
+    var targetBS = getTargetBloodSugar();
+    var result = currentBS - targetBS;
+
+    return result;
+  };
+
+  var divideByCorrectionFactor = function(value){
+    var bloodSugarCorrection = highBloodSugarCorrection();
+    var correctionFactor = getCorrectionFactor();
+    var result = bloodSugarCorrection / correctionFactor;
+
+    return result;
+  };
+
+  var totalMealDose = function(){
+    var result1 = carbCoverageAtMeal();
+    var result2 = divideByCorrectionFactor();
+    var result = result1 + result2;
+
+    return result;
+  };
+
+  var formatAMPM = function(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + '' + ampm;
+
+    return strTime;
+  };
+
+  var getDateNow = function(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    } 
+    if (mm < 10) {
+      mm = '0' + mm;
+    } 
+
+    var timeStr = formatAMPM(today);
+    var todayStr = timeStr + ' - ' + dd + '/' + mm + '/' + yyyy;
+    return todayStr;
+  };
+
+  var setupDataObject = function(){
+    var saveData = {
+      'date': getDateNow(),
+      'carbs': getCarbs() + "g",
+      'bs': getBloodSugar() + "mmol",
+      'tbs': getTargetBloodSugar() + "mmol",
+      'CHO': getCHORatio(),
+      'factor': getCorrectionFactor(),
+      'dosage': getDosage()
+    }
+
+    return saveData;
+  };
+
+  var checkingData = function(data){
+    if(data && data.length > 0){   
+       return true;
+    }else{
+       return false;
+    }
+  };
+  
+  var init = function () {
+    // myBin = new Bin('insulineDose');
+    // var isDataSaved = checkingData(myBin.get());
+    form.addEventListener("submit", showResults);
+    resetBtn.addEventListener("click", resetForm);
+  };
+  
+  var resetForm = function(){
+    outputArea.hidden = true;
+    submitBtn.disabled = false;
+    resetBtn.disabled = true;
+    form.reset();
+  }
+  
+  var showResults = function() {
+    var finalDose = Math.round(totalMealDose());
+    fields.outputDose.value = finalDose;
+    resetBtn.disabled = false;
+    outputArea.hidden = false;
+    submitBtn.disabled = true;
+    event.preventDefault();
+  };
+  
+  form.onsubmit = function() {
+    var final = totalMealDose();
+    output.value = Math.round(final);
+    outputArea.hidden = false;
+    myBin.set([setupDataObject()]);
+    setTimeout(function(){ console.log(myBin.get()) }, 3000);
+    return false;
+  };
+  
+  return {
+    init: init
+  };
+}();
+
+window.onload = function () {
+    Calculator.init()
+};
+      </script>
+    </main>
+    
+

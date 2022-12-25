@@ -1,0 +1,76 @@
+<%- include("admin") %>
+
+
+   <form action="/addDoctor" method="post">
+    <div class="container">
+        <h1> ADD Doctors</h1>
+        <input type="hidden" name="hid" value="<%=dom._id%>">
+        <div class="row">
+         <div class="col">
+            <label class="form-label" >Name</label>
+            <input type="text" name="name" class="form-control" id="" value="<%=dom.name%>" required>
+         </div>
+         <div class="col">
+            <label class="form-label" >Email</label>
+            <input type="email" name="email" class="form-control" value="<%=dom.email%>" id="" required>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label" >Contact No</label>
+            <input type="number" name="contact"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;"  class="form-control" value="<%=dom.contact_no%>" id="" required>
+          </div>
+          <div class="col">
+            <label class="form-label" >Specialization</label>
+            <input type="text" name="specialization" class="form-control"value="<%=dom.specialization%>"  id="" required>
+          </div>
+        </div>
+        <label class="form-label" >Address</label>
+        <input type="text" name="address" class="form-control" id="" value="<%=dom.address%>" required>
+        <div class="row">
+          <div class="col">
+            <label class="form-label" >Password</label>
+            <input type="password" name="password" class="form-control" value="<%=dom.password%>" id="" required>
+          </div>
+          <div class="col">
+            <label class="form-label" >Salary</label>
+            <input type="text" name="salary" class="form-control" value="<%=dom.salary%>" id="" required>
+          </div>
+
+        </div>
+        
+        <button style="margin-top: 20px;" type="submit" class="btn btn-lg btn-success">ADD</button>
+    </div>
+</form>
+<table class="table">
+  <thead>
+    <th>Sno</th>
+    <th>Name</th>
+    <th>email</th>
+    <th>Address</th>
+    <th>Specialization</th>
+    <th>Contact</th>
+    <th>Salary</th>
+    <th></th>
+    <th></th>
+
+  </thead>
+  <tbody>
+   <% doc.forEach(function(item){ %>
+    <tr>
+      <th><%=x%></th>
+      <td><%=item.name%></td>
+      <td><%=item.email%></td>
+      <td><%=item.address%></td>
+      <td><%=item.specialization%></td>
+      <td><%=item.contact_no%></td>
+      <td><%=item.salary%></td>
+      <td><a href="/addDoctor/<%=item._id%>"><i class="fas fa-edit"></i></a></td>
+      <td><a href="/addDoctor/del/<%=item._id%>" ><i class="fas fa-trash-alt"></i></a></td>
+
+    </tr>
+    <%x++;%>
+    <%}) %>
+    
+  </tbody>
+</table>

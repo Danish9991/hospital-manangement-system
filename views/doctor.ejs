@@ -1,0 +1,40 @@
+<%- include("partials/header") %>
+<div class="container">
+
+        <div class="row">
+            <a href="/addPatient" class="btn btn-outline-info" style="height: 150px; width: 200px; margin:0 10px 0 10px; text-align: center; font-size: x-large;">View Patients<i class="fas fa-user-md fa-3x" ></i></a>
+            <a href="/appiontments/<%=found._id%>" class="btn btn-outline-info" style="height: 150px; width: 200px; margin:0 10px 0 10px; text-align: center; font-size: x-large;">Appointments<i class="fas fa-hospital-user fa-3x" ></i></a>
+            <a href="/" class="btn btn-outline-info" style="height: 150px; width: 200px; margin:0 10px 0 10px; text-align: center; font-size: x-large;">LOGOUT<i class="fas fa-user-md fa-4x" ></i></a>
+        </div>
+        
+<h1>hey hello!</h1>
+<table class="table">
+    <thead>
+        <th>Sno</th>
+        <th>Name of Patient</th>
+        <th>Disease</th>
+        <th>Age</th>
+        <th>Ward</th>
+        <th></th>
+    </thead>
+    <tbody>
+      <%  pid.forEach(function(pat){ %>
+        <tr>
+            <td><%=x%></td>
+            <td><%=pat.name%></td>
+            <td><%=pat.disease%></td>
+            <td><%=pat.age%></td>
+            <td><%=pat.ward%></td>
+            <td><a href="/prescription/<%=pat._id%>" class="btn btn-dark">Give prescription</a></td>
+        </tr>
+        <%x++;%>
+     <%   }) %>
+        
+    </tbody>
+</table>
+
+
+
+
+
+</div>

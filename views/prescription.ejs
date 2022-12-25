@@ -1,0 +1,54 @@
+<%- include("partials/header") %>
+<div class="container">
+    <h1>Provide prescription</h1>
+    <form action="/prescription/<%=patient._id%>" method="post">
+        <div class="row">
+            <div class="col">
+                <label class="label-control">Name</label>
+                <input type="text" name="name" class="form-control" id="" value="<%=patient.name%>" required>
+            </div>
+            <div class="col">
+                <label class="label-control">Age</label>
+                <input type="text" name="age" class="form-control" id="" value="<%=patient.age%>" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="label-control">Contact</label>
+                <input type="text" name="contact" class="form-control" id="" value="<%=patient.contact%>"  required>
+            </div>
+            <div class="col">
+                <label class="label-control">Disease</label>
+                <input type="text" name="disease" class="form-control" id="" value="<%=patient.disease%>" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="label-control">Address</label>
+                <input type="text" name="address" class="form-control" id="" value="<%=patient.address%>" required>
+            </div>
+            <div class="col">
+                <label class="label-control">Ward</label>
+                <input type="text" name="ward" class="form-control" id="" value="<%=patient.ward%>" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="label-control">Doctor</label>
+                <input type="text" name="doctor" class="form-control" id="" value="<%=patient.doctor%>" required>
+            </div>
+            <div class="col">
+                <label class="label-control">Email</label>
+                <input type="text" name="email" class="form-control" id="" value="<%=patient.email%>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="form-label">Prescription</label>
+                <textarea name="prescription" class="form-control" id="" cols="30" rows="5" required></textarea>
+            </div>
+        </div>
+        <button style="margin-top: 20px;" type="submit" class="btn btn-lg btn-dark">Confirm/Send Email</button>
+    </form>
+    <a  href="/sms/<%=patient._id%>" style="margin: 20px 0;" class="btn btn-lg btn-success">Send SMS</a>
+</div>
